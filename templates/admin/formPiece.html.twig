@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'ajout de pièce{% endblock %}
+{% block metadesc %}Formulaire pour ajouter une pièce de cuir{% endblock %}
+
+{% block body %}
+
+        <h1>Ajouter une pièce</h1>
+        {{ form_start(formPiece)}}
+        {{ form_widget(formPiece) }}
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(formPiece) }}
+
+{% endblock %}
