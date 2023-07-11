@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Piece;
 use App\Form\PieceType;
+use App\Repository\CategoryRepository;
 use App\Repository\PieceRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,11 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/list', name: 'list')]
-    public function listAll(PieceRepository $repository): Response
+    public function listAll(PieceRepository $pieceRepository, CategoryRepository $categoryRepository): Response
     {
-        $piecesBdd= $repository->findAll();
+        $piecesBdd = $pieceRepository->findAll();
+        $categoriesBdd = $categoryRepository->findAll();
+
         return $this->render('admin/dashboard.html.twig', [
             'piecesBdd' => $piecesBdd,
+            'categoriesBdd' => $categoriesBdd,
         ]);
     }
 
@@ -28,7 +32,6 @@ class AdminController extends AbstractController
     public function addPiece(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $piece = new Piece();
-
         $formPiece = $this->createForm(PieceType::class, $piece);
         $formPiece->handleRequest($request);
         if($formPiece->isSubmitted() && $formPiece->isValid()){

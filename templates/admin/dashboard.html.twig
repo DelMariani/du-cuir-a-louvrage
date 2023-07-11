@@ -3,35 +3,62 @@
 {% block title %}Bonjour Du Cuir à l'Ouvrage !{% endblock %}
 {% block metadesc %}Tableau de bord du Cuir à l'Ouvrage{% endblock %}
  {% block body %}
-     <table class="table">
-         <thead>
-         <tr>
-             <th colspan="2">Liste des pièces </th>
-
-
-         </tr>
-         <th>ID</th>
-         <th>Nom</th>
-         <th>Couleur</th>
-         <th>Prix</th>
-         <th>Catégorie</th>
-         <th>Photo</th>
-         <th colspan="2">Actions</th>
-         </thead>
-         <tbody>
-         {% for piece in piecesBdd %}
+     <div>
+         <table class="table">
+             <thead>
              <tr>
-                 <td>{{ piece.id }}</td>
-                 <td>{{ piece.pceName }}</td>
-                 <td>{{ piece.pceColor }}</td>
-                 <td>{{ piece.pcePrice }}</td>
-                 <td>{{ piece.pceCategory.catNaming }}</td>
-                 <td><img src="{{ asset('img/' ~ piece.pcePhoto) }}"  class ="w-25" alt="{{piece.pceName}}"></td>
-                 <td><small><a href="{{ path('admin_update', {"slug": piece.slug}) }}"><i class="fa-solid fa-pen"></i></a></small><br><small><a href="{{ path('admin_delete', {"slug": piece.slug }) }}"><i class="fa-solid fa-trash-can"></i></a></small></td>
-             </tr>
+                 <th colspan="2">Liste des pièces </th>
 
-         {% endfor %}
-         </tbody>
-     </table>
+
+             </tr>
+             <th>ID</th>
+             <th>Nom</th>
+             <th>Couleur</th>
+             <th>Prix</th>
+             <th>Catégorie</th>
+             <th>Photo</th>
+             <th colspan="2">Actions</th>
+             </thead>
+             <tbody>
+             {% for piece in piecesBdd %}
+                 <tr>
+                     <td>{{ piece.id }}</td>
+                     <td>{{ piece.pceName }}</td>
+                     <td>{{ piece.pceColor }}</td>
+                     <td>{{ piece.pcePrice }}</td>
+                     <td>{{ piece.pceCategory.catNaming }}</td>
+                     <td><img src="{{ asset('img/' ~ piece.pcePhoto) }}"  class ="w-25" alt="{{piece.pceName}}"></td>
+                     <td><small><a href="{{ path('admin_update', {"slug": piece.slug}) }}"><i class="fa-solid fa-pen"></i></a></small><br><small><a href="{{ path('admin_delete', {"slug": piece.slug }) }}"><i class="fa-solid fa-trash-can"></i></a></small></td>
+                 </tr>
+
+             {% endfor %}
+             </tbody>
+         </table>
+     </div>
      <a class="btn btn-primary" href="{{ path('admin_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle pièce</a>
+
+     <div>
+         <table class="table">
+             <thead>
+             <tr>
+                 <th colspan="2">Liste des catégories </th>
+             </tr>
+             <th>Dénomination</th>
+             <th>Description</th>
+             <th colspan="2">Actions</th>
+             </thead>
+             <tbody>
+             {% for category in categoriesBdd %}
+                 <tr>
+                     <td>{{ category.catNaming }}</td>
+                     <td>{{ category.catDescribe }}</td>
+                     <td><small><a href="{{ path('admin_category_update', {"id": category.id}) }}"><i class="fa-solid fa-pen"></i></a></small><br><small><a href="{{ path('admin_category_delete', {"id": category.id}) }}"><i class="fa-solid fa-trash-can"></i></a></small></td>
+                 </tr>
+
+             {% endfor %}
+             </tbody>
+         </table>
+     </div>
+     <a class="btn btn-primary" href="{{ path('admin_category_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle catégorie</a>
+
  {% endblock %}
