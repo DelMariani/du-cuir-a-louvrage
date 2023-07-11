@@ -6,6 +6,7 @@ use App\Entity\Piece;
 use App\Form\PieceType;
 use App\Repository\CategoryRepository;
 use App\Repository\PieceRepository;
+use App\Repository\TrainingRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,14 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/list', name: 'list')]
-    public function listAll(PieceRepository $pieceRepository, CategoryRepository $categoryRepository): Response
+    public function listAll(PieceRepository $pieceRepository, CategoryRepository $categoryRepository, TrainingRepository $trainingRepository): Response
     {
         $piecesBdd = $pieceRepository->findAll();
         $categoriesBdd = $categoryRepository->findAll();
+        $trainingsBdd = $trainingRepository->findAll();
 
         return $this->render('admin/dashboard.html.twig', [
             'piecesBdd' => $piecesBdd,
             'categoriesBdd' => $categoriesBdd,
+            'trainingsBdd'=> $trainingsBdd
         ]);
     }
 

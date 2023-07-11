@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: TrainingRepository::class)]
+#[UniqueEntity('slug')]
 class Training
 {
     #[ORM\Id]
@@ -27,6 +30,9 @@ class Training
 
     #[ORM\Column(length: 255)]
     private ?string $trainPlace = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -91,5 +97,24 @@ class Training
         $this->trainPlace = $trainPlace;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function computeSlug(SluggerInterface $slugger)
+    {
+        if (!$this->slug || '-' === $this->slug){
+            $this->slug = (string) $slugger->slug((string) $this)->lower();
+        }
     }
 }
