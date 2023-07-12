@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Piece;
 use App\Form\PieceType;
 use App\Repository\CategoryRepository;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin', name:'admin_')]
 class AdminController extends AbstractController
@@ -27,7 +29,7 @@ class AdminController extends AbstractController
         return $this->render('admin/dashboard.html.twig', [
             'piecesBdd' => $piecesBdd,
             'categoriesBdd' => $categoriesBdd,
-            'trainingsBdd'=> $trainingsBdd
+            'trainingsBdd' => $trainingsBdd
         ]);
     }
 
@@ -37,16 +39,22 @@ class AdminController extends AbstractController
         $piece = new Piece();
         $formPiece = $this->createForm(PieceType::class, $piece);
         $formPiece->handleRequest($request);
-        if($formPiece->isSubmitted() && $formPiece->isValid()){
-            $fileUploaded = $formPiece->get('pcePhoto')->getData();
-            if($fileUploaded){
-                $fileUploadedName = $fileUploader->upload($fileUploaded);
-                $piece->setPcePhoto($fileUploadedName);
+        if ($formPiece->isSubmitted() && $formPiece->isValid()) {
+            $fileUploaded = $formPiece->get('images')->getData();
+            if ($fileUploaded) {
+                foreach ($fileUploaded as $file) {
+                    $fileUploadedName = $fileUploader->upload($file);
+
+                    $img = new Images();
+                    $img->setName($fileUploadedName);
+                    $piece->addImage($img);
+                }
+
             }
             $em->persist($piece);
             $em->flush();
             $this->addFlash('success', 'Votre nouvelle pièce a bien été enregistrée');
-            return $this->redirectToRoute('admin_new');
+            return $this->redirectToRoute('admin_list');
         }
 
         return $this->render('admin/formPiece.html.twig', [
@@ -55,51 +63,69 @@ class AdminController extends AbstractController
     }
 
     #[Route('/update/{slug}', name: 'update')]
-    public function updatePiece (EntityManagerInterface $em, Request $request, FileUploader $fileUploader, Piece $piece): Response
+    public function updatePiece(EntityManagerInterface $em, Request $request, FileUploader $fileUploader, Piece $piece, SluggerInterface $slugger): Response
     {
-        $oldPcePhoto = $piece->getPcePhoto();
+        $oldSlug = $piece->getSlug();
+        $oldImages = $piece->getImages()->toArray(); // Convertir la collection en tableau
+
         $formUpdate = $this->createForm(PieceType::class, $piece);
         $formUpdate->handleRequest($request);
 
-        if($formUpdate->isSubmitted() && $formUpdate->isValid()){
-            $fileUploaded = $formUpdate->get('pcePhoto')->getData();
-            //dd($fileUploaded);
-            if($fileUploaded){
-                $fileUploadedName = $fileUploader->upload($fileUploaded);
-                $piece->setPcePhoto($fileUploadedName);
-                if ($oldPcePhoto !== null && file_exists('img/'.$oldPcePhoto)) {
-                    unlink('img/'.$oldPcePhoto);
-                }
+        if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+            $fileUploaded = $formUpdate->get('images')->getData();
 
-
-            }else {
-                $piece->setPcePhoto($oldPcePhoto);
+            // Supprimer les anciennes images
+            foreach ($oldImages as $oldImage) {
+                $imageName = $oldImage->getName();
+                unlink('img/' . $imageName);
+                $piece->removeImage($oldImage);
+                $em->remove($oldImage);
             }
+
+            if ($fileUploaded) {
+                foreach ($fileUploaded as $file) {
+                    $fileUploadedName = $fileUploader->upload($file);
+
+                    $img = new Images();
+                    $img->setName($fileUploadedName);
+                    $piece->addImage($img);
+                }
+            }
+
+            $piece->computeSlug($slugger);
 
             $em->persist($piece);
             $em->flush();
+
             $this->addFlash('success', 'Votre pièce a bien été mise à jour');
-            return $this->redirectToRoute('admin_update');
+            return $this->redirectToRoute('admin_list');
         }
 
-
         return $this->render('admin/formPiece.html.twig', [
-            'formPiece'=> $formUpdate->createView()
-
+            'formPiece' => $formUpdate->createView()
         ]);
     }
+
+
 
     #[Route('/delete/{slug}', name: 'delete')]
     public function deletePiece(EntityManagerInterface $em, Piece $piece): Response
     {
-        $pcePhoto = $piece->getPcePhoto();
-        unlink('img/' . $pcePhoto);
+        $images = $piece->getImages();
+
+        foreach ($images as $image) {
+            $imagePath = 'img/' . $image->getName();
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
         $em->remove($piece);
         $em->flush();
 
         $this->addFlash("success", "Votre pièce a été supprimée");
         return $this->redirectToRoute("admin_list");
-
-        return $this->render('admin/formPiece.html.twig');
     }
+
+
 }

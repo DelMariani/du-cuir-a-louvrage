@@ -19,7 +19,7 @@ class PieceType extends AbstractType
             ->add('pceName', TextType::class, ['label'=> 'Nom de la pièce'])
             ->add('pceColor', TextType::class, ['label'=>'Couleur'])
             ->add('pcePrice', TextType::class, ['label'=>'Prix TTC'])
-            ->add('pcePhoto', FileType::class, array('data_class'=>null, 'mapped'=>false, 'required'=>false, 'label'=>'photo'))
+            ->add('images', FileType::class, array('data_class'=>null, 'mapped'=>false, 'required'=>false, 'label'=>'Photo', 'multiple'=>true))
             ->add('pceCategory', EntityType::class, ['class'=>Category::class, 'choice_label'=>'catNaming'])
         ;
     }

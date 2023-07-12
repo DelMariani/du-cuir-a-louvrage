@@ -17,9 +17,9 @@ class TrainingType extends AbstractType
             ->add('trainTitled', TextType::class, ['label'=> 'Nom de la formation'])
             ->add('trainTopic', TextType::class, ['label'=> 'Thème'])
             ->add('trainDate', DateTimeType::class, [ 'widget' => 'single_text', 'html5'=> false, 'format' => 'dd-MM-yyyy',
-                'input' => 'datetime_immutable'])
-            ->add('trainSeat', TextType::class, ['label'=> 'Lieu'])
-            ->add('trainPlace', TextType::class, ['label'=>'Nombre de places'])
+                'input' => 'datetime_immutable', 'label'=>'Date'])
+            ->add('trainSeat', TextType::class, ['label'=>'Nombre de places'] )
+            ->add('trainPlace', TextType::class, ['label'=> 'Lieu'])
         ;
     }
 

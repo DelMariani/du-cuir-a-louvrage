@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue à Du Cuir à l'Ouvrage!{% endblock %}
+{% block metadesc %}Site d'exposition de mes pièces uniques en cuir, de qualité, entièrement cousues main{% endblock %}
+
+{% block body %}
+
+    <h1>Du Cuir à l'Ouvrage vous souhaite la bienvenue !</h1>
+    <div>
+        <h2>Boutique</h2>
+
+        {% for piece in piecesBdd %}
+            <div class="card" style="width: 18rem;">
+                <div>{% for image in piece.images %}
+                        <img src="{{ asset('img/' ~ image.name) }}" class="w-25" alt="{{ piece.pceName }}">
+                    {% endfor %}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ piece.pceName }}</h5>
+                    <p class="card-text">{{ piece.pceColor }}, {{ piece.pceCategory.catNaming }}, {{ piece.pcePrice }} € </p>
+                    <a href="{{ path('details', {'slug': piece.slug}) }}" class="btn btn-primary">Plus de détails</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h2>Formations</h2>
+
+        {% for training in trainingsBdd %}
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{  training.trainTitled }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ training.trainTopic }}</li>
+                <li class="list-group-item">{{ training.trainDate|date("d-m-Y") }}</li>
+                <li class="list-group-item">{{ training.trainSeat }}</li>
+                <li class="list-group-item">{{ training.trainPlace }}</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Contactez-moi pour réserver</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

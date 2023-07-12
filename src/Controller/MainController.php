@@ -2,17 +2,35 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
+use App\Repository\PieceRepository;
+use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
-    public function index(): Response
+    #[Route('/', name: 'home')]
+    public function listOfAll(PieceRepository $pieceRepository, CategoryRepository $categoryRepository, TrainingRepository $trainingRepository): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        $piecesBdd = $pieceRepository->findAll();
+        $categoriesBdd = $categoryRepository->findAll();
+        $trainingsBdd = $trainingRepository->findAll();
+
+        return $this->render('main/home.html.twig', [
+            'piecesBdd' => $piecesBdd,
+            'categoriesBdd' => $categoriesBdd,
+            'trainingsBdd' => $trainingsBdd,
+        ]);
+    }
+    #[Route('/details/{slug}', name: 'details')]
+    public function details(string $slug,PieceRepository $pieceRepository): Response
+    {
+        $piece = $pieceRepository->findOneBy(['slug'=> $slug]);
+
+        return $this->render('main/details.html.twig', [
+            'piece' => $piece,
         ]);
     }
 }

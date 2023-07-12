@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PieceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -30,10 +32,15 @@ class Piece
     private ?Category $pceCategory = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pcePhoto = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $slug=null;
+
+    #[ORM\OneToMany(mappedBy: 'piece', targetEntity: Images::class, cascade: ["persist"])]
+    private Collection $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
     public function computeSlug(SluggerInterface $slugger)
     {
         if (!$this->slug || '-' === $this->slug) {
@@ -93,27 +100,15 @@ class Piece
         return $this;
     }
 
-    public function getPcePhoto(): ?string
-    {
-        return $this->pcePhoto;
-    }
-
-    public function setPcePhoto(string $pcePhoto): static
-    {
-        $this->pcePhoto = $pcePhoto;
-
-        return $this;
-    }
-
-    public function setPhotoFile(?File $photoFile = null): void
-    {
-        $this->photoFile= $photoFile;
-    }
-    public function getPhotoFile() : ?File
-    {
-        return $this->photoFile;
-    }
-
+    /*public function setPhotoFile(?File $photoFile = null): void
+    *{
+    *    $this->photoFile= $photoFile;
+    *}
+    *public function getPhotoFile() : ?File
+    *{
+    *    return $this->photoFile;
+    *}
+*/
 
     /**
      * @return string|null
@@ -129,6 +124,36 @@ class Piece
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setPiece($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getPiece() === $this) {
+                $image->setPiece(null);
+            }
+        }
+
+        return $this;
     }
 
 

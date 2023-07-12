@@ -26,7 +26,9 @@
                      <td>{{ piece.pceColor }}</td>
                      <td>{{ piece.pcePrice }} € </td>
                      <td>{{ piece.pceCategory.catNaming }}</td>
-                     <td><img src="{{ asset('img/' ~ piece.pcePhoto) }}"  class ="w-25" alt="{{piece.pceName}}"></td>
+                     <td>{% for image in piece.images %}
+                             <img src="{{ asset('img/' ~ image.name) }}" class="w-25" alt="{{ piece.pceName }}">
+                         {% endfor %}</td>
                      <td><small><a href="{{ path('admin_update', {"slug": piece.slug}) }}"><i class="fa-solid fa-pen"></i></a></small><br><small><a href="{{ path('admin_delete', {"slug": piece.slug }) }}"><i class="fa-solid fa-trash-can"></i></a></small></td>
                  </tr>
 
@@ -82,7 +84,7 @@
                      <td>{{ training.id }}</td>
                      <td>{{ training.trainTitled }}</td>
                      <td>{{ training.trainTopic }}</td>
-                     <td>{{ training.trainDate|date("d-m-Y hh:mm") }} € </td>
+                     <td>{{ training.trainDate|date("d-m-Y") }} </td>
                      <td>{{ training.trainSeat}}</td>
                      <td>{{ training.trainPlace }}</td>
                      <td><small><a href="{{ path('admin_training_update', {"slug": training.slug}) }}"><i class="fa-solid fa-pen"></i></a></small><br><small><a href="{{ path('admin_training_delete', {"slug": training.slug }) }}"><i class="fa-solid fa-trash-can"></i></a></small></td>

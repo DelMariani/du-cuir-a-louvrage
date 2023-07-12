@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\TrainingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: TrainingRepository::class)]
-#[UniqueEntity('slug')]
+#[ORM\HasLifecycleCallbacks]
 class Training
 {
     #[ORM\Id]
@@ -22,7 +23,7 @@ class Training
     #[ORM\Column(length: 255)]
     private ?string $trainTopic = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $trainDate = null;
 
     #[ORM\Column]
@@ -104,17 +105,18 @@ class Training
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    /**
+     * @param string|null $slug
+     */
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     public function computeSlug(SluggerInterface $slugger)
     {
         if (!$this->slug || '-' === $this->slug){
-            $this->slug = (string) $slugger->slug((string) $this)->lower();
+            $this->slug = (string) $slugger->slug((string) $this->trainTitled)->lower();
         }
     }
 }
