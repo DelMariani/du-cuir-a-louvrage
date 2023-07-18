@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Commander</h1>
+        <h3>Rappel de votre panier</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Pièce</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in dataPanier %}
+            <tr>
+                <td>{{ element.piece.pceName }}</td>
+                <td class="text-ent">{{ element.piece.pcePrice }} €</td>
+                <td>{{ element.quantite }}</td>
+                <td class="text-end">{{ element.quantite * element.piece.pcePrice }} €</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Votre panier est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Total</td>
+            <td class="text-end">{{ total }} €</td>
+        </tr>
+        </tfoot>
+    </table>
+        <p>Nous vous remercions pour votre commande. Merci d'envoyer votre réglement à telle adresse. Dès réception votre colis vous sera envoyé à l'adresse de livraison que vous avez renseigné.</p>
+    </section>
+{% endblock %}

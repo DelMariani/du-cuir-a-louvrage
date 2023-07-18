@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/categorie', name:'admin_category')]
 class CategorieController extends AbstractController
 {
+
     #[Route('/new', name: '_new')]
     public function addCategory(Request $request, EntityManagerInterface $em): Response
     {

@@ -39,6 +39,17 @@ class PieceRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCategory(string $category): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.categories', 'c')
+            ->andWhere('c.name = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 //    /**
 //     * @return Piece[] Returns an array of Piece objects
 //     */

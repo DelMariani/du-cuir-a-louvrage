@@ -18,6 +18,7 @@
                     <h5 class="card-title">{{ piece.pceName }}</h5>
                     <p class="card-text">{{ piece.pceColor }}, {{ piece.pceCategory.catNaming }}, {{ piece.pcePrice }} € </p>
                     <a href="{{ path('details', {'slug': piece.slug}) }}" class="btn btn-primary">Plus de détails</a>
+                    <a href="{{ path('cart_add', {'id': piece.id}) }}" class="btn btn-success">Ajouter au panier</a>
                 </div>
             </div>
         {% endfor %}
@@ -43,6 +44,16 @@
             </div>
         </div>
         {% endfor %}
+    </div>
+
+    <div>
+        <h2>Contact</h2>
+
+        {{ form_start(contactForm) }}
+        {{ form_widget(contactForm) }}
+        <button type="submit" >Envoyer</button>
+        {{ form_end(contactForm) }}
+
     </div>
 
 
