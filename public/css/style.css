@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    margin : 0;
+    padding:0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #E4ECE8;
+}
+
+h1  {
+    font-family: "Baskerville Old Face";
+    font-size: 58px;
+    color: #5b9076;
+    padding-left: 5vh;
+}
+
+h2 {
+    font-family: "Baskerville Old Face";
+    font-style: italic;
+}
