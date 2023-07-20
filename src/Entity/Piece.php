@@ -34,7 +34,7 @@ class Piece
     #[ORM\Column(length: 255)]
     private ?string $slug=null;
 
-    #[ORM\OneToMany(mappedBy: 'piece', targetEntity: Images::class, cascade: ["persist"])]
+    #[ORM\OneToMany(mappedBy: 'piece', targetEntity: Images::class, cascade: ["persist", "remove"])]
     private Collection $images;
 
     public function __construct()

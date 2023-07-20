@@ -9,14 +9,37 @@ body {
     background: #E4ECE8;
 }
 
+header {
+    margin-top: 30px;
+}
+
 h1  {
     font-family: "Baskerville Old Face";
-    font-size: 58px;
+    font-size: 65px;
     color: #5b9076;
-    padding-left: 5vh;
+    padding: 6vh;
 }
 
 h2 {
     font-family: "Baskerville Old Face";
     font-style: italic;
+    font-size: 50px;
+    margin-right: 10vh;
+    color: #bd9742;
+    font-weight: bolder;
+}
+
+h3 {
+    font-family: "Baskerville Old Face";
+    font-style: italic;
+    font-size: 40px;
+    text-align: center;
+    color: #bd9742;
+}
+
+.container-fluid {
+    background-image: url("../img/reception/Fond Jaune.jpg");
+    position: fixed;
+    z-index: 100;
+    padding-top: 6vh;
 }
