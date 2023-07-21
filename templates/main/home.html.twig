@@ -8,7 +8,7 @@
     <div class="mb-3 text-center" id="home">
         <h1>Du Cuir à l'Ouvrage</h1>
         <div class="d-flex">
-            <img src="{{ asset('img/reception/DianeHead.jpg') }}" alt="créatrice">
+            <img src="{{ asset('img/reception/343298567_933223661259540_2669462483490099128_n.jpg') }}" alt="créatrice">
             <p>Passionnée depuis toujours par les métiers manuels, je me dirige en 2011 veres le métier de sellier harnacheur puis de sellier maroquinier. <br> Après trois années au sein de la Maison Hermès je m'installe en Ardèche, à Saint Andéol de Valls et décide en 2021 de créer ma micro-entreprise. <br> Je crée essentiellement des sacs mais aussi des articles de petites maroquineries: portefeuilles, porte-cartes, pochettes. <br> Les cuirs sont sélectionnés avec soin. Toutes les étapes de fabrication sont entièrement réalisées à la main. <br> !! Même la couture !! <br> Il est possible de commander sur mesure. </b></p>
         </div>
     </div>
@@ -112,14 +112,20 @@
     </div>
 
     <div class="container my-5" id="contact">
-        <h3>Contact</h3>
-        <div class="row">
-            <div class="offset-md-3">
+        <h3>Savoir lire entre les coutures...Pour toutes questions, n'hésitez pas à me contacter
+        </h3>
+        <div class="d-flex justify-content-evenly">
+            <div>
+                <img  src="{{ asset('img/reception/79932930_137543271001860_4278539368215347200_n.jpg')}}" alt="photo créatrice">
+            </div>
+            <div >
                 {{ form_start(contactForm) }}
                 {{ form_widget(contactForm) }}
-                <button type="submit" >Envoyer</button>
+                <button type="submit" class="btn btn-warning">Envoyer</button>
                 {{ form_end(contactForm) }}
             </div>
+
+
         </div>
     </div>
 
