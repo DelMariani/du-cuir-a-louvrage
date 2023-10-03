@@ -9,6 +9,7 @@ body {
     background: #E4ECE8;
 }
 
+
 header {
     margin-top: 30px;
 }
@@ -42,4 +43,50 @@ h3 {
     position: fixed;
     z-index: 100;
     padding-top: 6vh;
+}
+
+/* base */
+#icon {
+    padding-top: 10px;
+}
+
+
+/* media queries                    media queries               media queries               */
+@media (max-width: 992px){
+    h1 {
+        width: auto;
+    }
+
+    h2, h3 {
+        text-align: center;
+        padding: 5vh;
+    }
+
+    .intro, .shop {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 80vw;
+    }
+
+    .presentation {
+        padding-top: 5vh;
+    }
+
+    .card {
+        margin: 3vh;
+    }
+
+    #designer {
+        display: none;
+    }
+
+    #train {
+        justify-content: center;
+    }
+
+    .form-control, #contact-form {
+        width: auto;
+    }
 }
