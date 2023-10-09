@@ -8,10 +8,13 @@
         {% block stylesheets %}
             <!-- link Bootstrap !-->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
             <!-- link fontawesome !-->
             <script src="https://kit.fontawesome.com/b8948c1496.js" crossorigin="anonymous"></script>
             <!-- link CSS !-->
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <!-- link animate CSS !-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         {% endblock %}
 
         {% block javascripts %}
@@ -22,7 +25,7 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ path('home') }}">  <div>
-                    <img src="{{ asset('img/reception/DCO_LOGO Jaune Texturé.jpg') }}" alt="logo">
+                    <img id="icon" src="{{ asset('img/reception/DCO_LOGO Jaune Texturé.jpg') }}" alt="logo">
                 </div></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,5 +86,7 @@
     </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- link JS !-->
+    <script src="{{ asset('script.js') }}"></script>
     </body>
 </html>
