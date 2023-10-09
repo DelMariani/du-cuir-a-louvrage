@@ -45,6 +45,34 @@ h3 {
     padding-top: 6vh;
 }
 
+.btn-success {
+    background-color: #5b9076;
+}
+
+.btn-primary {
+    background-color: #6c2c9e;
+}
+
+.bi-balloon-heart-fill {
+    position: absolute;
+    top: 2vh;
+    left:42vh;
+    display: none;
+    color: #6c2c9e;
+
+
+}
+
+#back-to-top {
+    position : fixed;
+    bottom : 40px;
+    right: 20px;
+    font-size: 25px;
+    display: none;
+    z-index: 1000;
+    color: #5b9076;
+}
+
 /* base */
 #icon {
     padding-top: 10px;
