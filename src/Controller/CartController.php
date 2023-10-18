@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\Piece;
 use App\Repository\PieceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
