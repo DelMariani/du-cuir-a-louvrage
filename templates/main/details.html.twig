@@ -5,11 +5,12 @@
 
 {% block body %}
 
+<h1>{{ piece.pceName }}</h1>
     <div class="card mb-3">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row justify-content-center">
+            <div class="col-7">
 
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 90%;">
                     <div>
                         {% for image in piece.images %}
                                 <img src="{{ asset('img/' ~ image.name) }}" class="w-25" alt="{{ piece.pceName }}">

@@ -4,10 +4,11 @@
 
 {% block body %}
 
-    <h1>Inscription</h1>
+    <h1 class="mt-5">Inscription</h1>
+    <div class="container">
     {{ form_start(userForm) }}
     {{ form_widget(userForm) }}
-    <button type="submit" >Enregistrer</button>
+    <button class="btn btn-warning my-3" type="submit" >Enregistrer</button>
     {{ form_end(userForm) }}
-
+    </div>
 {% endblock %}

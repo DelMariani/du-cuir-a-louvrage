@@ -15,13 +15,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, ['label'=> 'Email', 'attr'=>['class'=> 'form-label form-control m-1']])
             ->add('password', RepeatedType::class, [
                 'type'=> PasswordType::class,
                 'invalid_message'=> 'Les mots de passe doivent être identiques',
                 'required'=>true,
-                'first_options'=>['label'=>'Mot de passe'],
-                'second_options'=>['label'=>'Confirmez le mot de passe'],
+                'first_options'=>['label'=>'Mot de passe', 'attr'=>['class'=>'form-label form-control m-1']],
+                'second_options'=>['label'=>'Confirmez le mot de passe', 'attr'=>['class'=>'form-label form-control m-1']],
             ])
         ;
     }

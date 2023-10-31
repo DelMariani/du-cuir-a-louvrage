@@ -4,44 +4,46 @@
 {% block metadesc %}Site d'exposition de mes pièces uniques en cuir, de qualité, entièrement cousues main{% endblock %}
 
 {% block body %}
-<header class="my-5">
-    <div class="mb-3 text-center" id="home">
-        <h1>Du Cuir à l'Ouvrage</h1>
-        <div class="d-flex intro">
-            <img src="{{ asset('img/reception/343298567_933223661259540_2669462483490099128_n.jpg') }}" alt="créatrice">
-            <p class="presentation w-50 m-5">Passionnée depuis toujours par les métiers manuels, je me dirige en 2011 veres le métier de sellier harnacheur puis de sellier maroquinier. <br> Après trois années au sein de la Maison Hermès je m'installe en Ardèche, à Saint Andéol de Valls et décide en 2021 de créer ma micro-entreprise. <br> Je crée essentiellement des sacs mais aussi des articles de petites maroquineries: portefeuilles, porte-cartes, pochettes. <br> Les cuirs sont sélectionnés avec soin. Toutes les étapes de fabrication sont entièrement réalisées à la main. <br> !! Même la couture !! <br> Il est possible de commander sur mesure. </b></p>
-        </div>
-    </div>
-</header>
-
-
-
-
-    <div class="container my-5">
-        <h2>Boutique</h2>
-
-        <a href="#home" id="back-to-top"><i class="bi bi-arrow-up-square-fill"></i></a>
-
-
-        <div class="row justify-content-between offset-md-1" id="shop">
-            {% for piece in piecesBdd %}
-                <div class="card m-3" style="width: 22rem;">
-                    <div>
-                        {% for index, image in piece.images %}
-                            {% if index == 0 %}
-                                <img src="{{ asset('img/' ~ image.name) }}" class="w-50" alt="{{ piece.pceName }}">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ piece.pceName }}</h5>
-                        <p class="card-text">{{ piece.pceColor }}, {{ piece.pceCategory.catNaming }}, {{ piece.pcePrice }} € </p>
-                        <a href="{{ path('details', {'slug': piece.slug}) }}" class="btn btn-primary">Plus de détails</a>
-                        <a href="{{ path('cart_add', {'id': piece.id}) }}" class="btn btn-success" id="addJs">Ajouter au panier</a>
-                        <i class="bi bi-balloon-heart-fill animate__animated animate__heartBeat" id="balloon-heart"></i>
-                    </div>
+    <section class="container">
+        <header class="my-5 head">
+            <div class="mb-3 text-center" id="home">
+                <h1>Du Cuir à l'Ouvrage</h1>
+                <div class="d-flex intro">
+                    <img src="{{ asset('img/reception/343298567_933223661259540_2669462483490099128_n.jpg') }}" alt="créatrice">
+                    <p class="presentation w-50 m-5">Passionnée depuis toujours par les métiers manuels, je me dirige en 2011 veres le métier de sellier harnacheur puis de sellier maroquinier. <br> Après trois années au sein de la Maison Hermès je m'installe en Ardèche, à Saint Andéol de Valls et décide en 2021 de créer ma micro-entreprise. <br> Je crée essentiellement des sacs mais aussi des articles de petites maroquineries: portefeuilles, porte-cartes, pochettes. <br> Les cuirs sont sélectionnés avec soin. Toutes les étapes de fabrication sont entièrement réalisées à la main. <br> !! Même la couture !! <br> Il est possible de commander sur mesure. <br></p>
                 </div>
-            {% endfor %}
+            </div>
+        </header>
+    </section>
+
+
+    <div class="shop-list py-3">
+        <div class="container my-5">
+            <h2>Boutique</h2>
+
+            <a href="#home" id="back-to-top"><i class="bi bi-arrow-up-square-fill"></i></a>
+
+
+            <div class="row justify-content-between offset-md-1" id="shop">
+                {% for piece in piecesBdd %}
+                    <div class="card m-3" style="width: 22rem;">
+                        <div>
+                            {% for index, image in piece.images %}
+                                {% if index == 0 %}
+                                    <img src="{{ asset('img/' ~ image.name) }}" class="w-50" alt="{{ piece.pceName }}">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ piece.pceName }}</h5>
+                            <p class="card-text">{{ piece.pceColor }}, {{ piece.pceCategory.catNaming }}, {{ piece.pcePrice }} € </p>
+                            <a href="{{ path('details', {'slug': piece.slug}) }}" class="btn btn-primary">Plus de détails</a>
+                            <a href="{{ path('cart_add', {'id': piece.id}) }}" class="btn btn-success" id="addJs">Ajouter au panier</a>
+                            <i class="bi bi-balloon-heart-fill animate__animated animate__heartBeat" id="balloon-heart"></i>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -68,57 +70,58 @@
         </div>
     </div>
 
-    <div class="container">
-        <h3>Où retrouver une part de mes créations</h3>
-        <div class="d-flex shop">
-            <div class="card m-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">BOCAL Collectif d'artisans</h5>
-                            <p class="card-text">
-                                montée du porail, Antraigues-sur-Volane, France, 07530</p>
-                            <p><small>Ouvertures : mardi
-                                    09:00 - 12:00 <br> mercredi
-                                    10:30 - 13:30
-                                    14:30 - 17:30 <br> samedi & dimanche
-                                    10:30 - 13:30
-                                    14:30 - 17:30</small></p>
+    <div class="store-list py-5">
+        <div class="container">
+            <h3>Où retrouver une part de mes créations</h3>
+            <div class="d-flex shop">
+                <div class="card m-3" style="max-width: 640px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">BOCAL Collectif d'artisans</h5>
+                                <p class="card-text">
+                                    montée du porail, Antraigues-sur-Volane, France, 07530</p>
+                                <p><small>Ouvertures : mardi
+                                        09:00 - 12:00 <br> mercredi
+                                        10:30 - 13:30
+                                        14:30 - 17:30 <br> samedi & dimanche
+                                        10:30 - 13:30
+                                        14:30 - 17:30</small></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{{ asset('img/reception/bocal_collectif_d_artisans.jpg') }}" class="img-fluid rounded-start" alt="devanture Bocal collectif d'artisans">
+                        <div class="col-md-4">
+                            <img src="{{ asset('img/reception/bocal_collectif_d_artisans.jpg') }}" class="img-fluid rounded-start" alt="devanture Bocal collectif d'artisans">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card m-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">BOCAL Collectif d'artisans</h5>
-                            <p class="card-text">
-                                montée du porail, Antraigues-sur-Volane, France, 07530</p>
-                            <p><small>Ouvertures : mardi
-                                    09:00 - 12:00 <br> mercredi
-                                    10:30 - 13:30
-                                    14:30 - 17:30 <br> samedi & dimanche
-                                    10:30 - 13:30
-                                    14:30 - 17:30</small></p>
+                <div class="card m-3" style="max-width: 640px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">BOCAL Collectif d'artisans</h5>
+                                <p class="card-text">
+                                    montée du porail, Antraigues-sur-Volane, France, 07530</p>
+                                <p><small>Ouvertures : mardi
+                                        09:00 - 12:00 <br> mercredi
+                                        10:30 - 13:30
+                                        14:30 - 17:30 <br> samedi & dimanche
+                                        10:30 - 13:30
+                                        14:30 - 17:30</small></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{{ asset('img/reception/bocal_collectif_d_artisans.jpg') }}" class="img-fluid rounded-start" alt="devanture Bocal collectif d'artisans">
+                        <div class="col-md-4">
+                            <img src="{{ asset('img/reception/bocal_collectif_d_artisans.jpg') }}" class="img-fluid rounded-start" alt="devanture Bocal collectif d'artisans">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container my-5" id="contact">
-        <h3>Savoir lire entre les coutures...Pour toutes questions, n'hésitez pas à me contacter
+        <h3>Savoir lire entre les coutures...<br>Pour toutes questions,<br>n'hésitez pas à me contacter
         </h3>
-        <div class="d-flex justify-content-evenly">
+        <div class="d-flex justify-content-evenly pt-5">
             <div>
                 <img id="designer" src="{{ asset('img/reception/79932930_137543271001860_4278539368215347200_n.jpg')}}" alt="photo créatrice">
             </div>
@@ -133,8 +136,8 @@
         </div>
     </div>
 
-    <footer>
-        <section class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between py-5">
+    <footer class="footer-list">
+        <section class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between py-5">
         <div class="card" style="width: 18rem;">
             <div class="card-header bg-info-subtle">
                 Boutique
@@ -178,8 +181,8 @@
                 </ul>
             </article>
             <article class="d-flex flex-column">
-                <a class="foot-link" href="{{ path('authin') }}">Connexion</a>
-                <a class="foot-link" href="{{ path('user_registration') }}">Inscription</a>
+                <a class="foot-link btn btn-warning m-2" href="{{ path('authin') }}">Connexion</a>
+                <a class="foot-link btn btn-warning m-2" href="{{ path('user_registration') }}">Inscription</a>
             </article>
         </section>
         <div class="card-footer bg-secondary bg-gradient text-center p-1 mb-3">

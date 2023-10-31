@@ -5,11 +5,12 @@
 
 {% block body %}
 
-        <h1>Ajouter une pièce</h1>
-        {{ form_start(formPiece)}}
-        {{ form_widget(formPiece) }}
+        <h1 class="mt-5">Ajouter une pièce</h1>
+        <div class="container">
+                {{ form_start(formPiece)}}
+                {{ form_widget(formPiece) }}
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        {{ form_end(formPiece) }}
-
+                <button type="submit" class="btn btn-primary my-3">Enregistrer</button>
+                {{ form_end(formPiece) }}
+        </div>
 {% endblock %}

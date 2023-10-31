@@ -13,3 +13,15 @@ window.addEventListener('scroll', function(){
 document.getElementById("addJs").addEventListener("click", function() {
     document.getElementById('balloon-heart').style.display = 'block';
 });
+
+// navbar
+
+window.addEventListener('scroll', scrollFunction);
+
+function scrollFunction() {
+    if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        document.getElementById("my-navbar").style.opacity = 0.8;
+    } else {
+        document.getElementById("my-navbar").style.opacity = 1;
+    }
+}
