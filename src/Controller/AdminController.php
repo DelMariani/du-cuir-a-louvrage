@@ -19,6 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/admin', name:'admin_')]
 class AdminController extends AbstractController
 {
+    // READ
     #[Route('/list', name: 'list')]
     public function listAll(PieceRepository $pieceRepository, CategoryRepository $categoryRepository, TrainingRepository $trainingRepository): Response
     {
@@ -33,6 +34,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    //CREATE
     #[Route('/new', name: 'new')]
     public function addPiece(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
@@ -62,6 +64,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    //UPDATE
     #[Route('/update/{slug}', name: 'update')]
     public function updatePiece(EntityManagerInterface $em, Request $request, FileUploader $fileUploader, Piece $piece, SluggerInterface $slugger): Response
     {
@@ -107,7 +110,7 @@ class AdminController extends AbstractController
     }
 
 
-
+    // DELETE
     #[Route('/delete/{slug}', name: 'delete')]
     public function deletePiece(EntityManagerInterface $em, Piece $piece): Response
     {

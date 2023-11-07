@@ -23,7 +23,7 @@ class AuthController extends AbstractController
     #[Route('/authout', name: 'authout')]
     public function authOut(): void
     {
-        // change response à void, symfony fait le reste
+        // changer response à void, symfony fait le reste
 
     }
 }
