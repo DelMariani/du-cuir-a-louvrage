@@ -11,7 +11,7 @@
              <table class="table">
                  <thead>
                  <tr>
-                     <th class="my-5 text-center fs-1" colspan="8">Liste des pièces </th>
+                     <th class="my-5 fs-1" colspan="8">Liste des pièces </th>
 
                  </tr>
                  <th>ID</th>
@@ -23,7 +23,7 @@
                  <th colspan="2">Actions</th>
                  </thead>
                  <tbody>
-                 {% for piece in piecesBdd %}
+                 {% for piece in piecesBdd|reverse %}
                      <tr>
                          <td>{{ piece.id }}</td>
                          <td>{{ piece.pceName }}</td>
@@ -46,14 +46,14 @@
              <table class="table">
                  <thead>
                  <tr>
-                     <th class="my-5 text-center fs-1" colspan="8">Liste des catégories </th>
+                     <th class="my-5 fs-1" colspan="8">Liste des catégories </th>
                  </tr>
                  <th>Dénomination</th>
                  <th>Description</th>
                  <th colspan="2">Actions</th>
                  </thead>
                  <tbody>
-                 {% for category in categoriesBdd %}
+                 {% for category in categoriesBdd|reverse %}
                      <tr>
                          <td>{{ category.catNaming }}</td>
                          <td>{{ category.catDescribe }}</td>
@@ -71,19 +71,19 @@
              <table class="table">
                  <thead>
                  <tr>
-                     <th class="my-5 text-center fs-1" colspan="8">Liste des formations</th>
+                     <th class="my-5 fs-1" colspan="8">Liste des formations</th>
                  </tr>
 
                  <th>ID</th>
                  <th>Titre de la formation</th>
                  <th>Thème</th>
                  <th>Date</th>
-                 <th>Lieu</th>
                  <th>Nombre de place</th>
+                 <th>Lieu</th>
                  <th colspan="2">Actions</th>
                  </thead>
                  <tbody>
-                 {% for training in trainingsBdd %}
+                 {% for training in trainingsBdd|reverse %}
                      <tr>
                          <td>{{ training.id }}</td>
                          <td>{{ training.trainTitled }}</td>
