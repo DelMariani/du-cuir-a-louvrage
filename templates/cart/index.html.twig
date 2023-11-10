@@ -25,8 +25,8 @@
                     <td>{{ element.quantite }}</td>
                     <td class="text-end">{{ element.quantite * element.piece.pcePrice }} €</td>
                     <td>
-                        <a href="{{ path('cart_add', {'id': element.piece.id}) }}" class="btn btn-success">Ajouter</a>
-                        <a href="{{ path('cart_remove', {'id': element.piece.id}) }}" class="btn btn-warning">Retirer</a>
+                        <a href="{{ path('cart_add', {'id': element.piece.id}) }}" class="btn btn-success">+</a>
+                        <a href="{{ path('cart_remove', {'id': element.piece.id}) }}" class="btn btn-warning">-</a>
                         <a href="{{ path('cart_delete', {'id': element.piece.id}) }}" class="btn btn-danger">Supprimer</a>
 
                     </td>
@@ -42,7 +42,7 @@
         <tr>
             <td colspan="3">Total</td>
             <td class="text-end">{{ total }} €</td>
-            <td><a href="{{ path('cart_order') }}" class="btn btn-primary">Commander</a></td>
+            <td><a href="{{ path('app_orders_add') }}" class="btn btn-primary">Commander</a></td>
         </tr>
         </tfoot>
     </table>

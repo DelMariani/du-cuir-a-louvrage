@@ -8,11 +8,12 @@
 
      <div class="container ">
          <div class="mb-5">
+             <a class="btn btn-primary" href="{{ path('admin_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle pièce</a>
+
              <table class="table">
                  <thead>
                  <tr>
-                     <th class="my-5 fs-1" colspan="8">Liste des pièces </th>
-
+                     <th class="my-5 fs-1" colspan="8">Liste des pièces</th>
                  </tr>
                  <th>ID</th>
                  <th>Nom</th>
@@ -39,10 +40,11 @@
                  {% endfor %}
                  </tbody>
              </table>
-            <a class="btn btn-primary" href="{{ path('admin_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle pièce</a>
          </div>
 
          <div class="mb-5">
+             <a class="btn btn-primary" href="{{ path('admin_category_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle catégorie</a>
+
              <table class="table">
                  <thead>
                  <tr>
@@ -63,11 +65,12 @@
                  {% endfor %}
                  </tbody>
              </table>
-             <a class="btn btn-primary" href="{{ path('admin_category_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle catégorie</a>
          </div>
 
 
          <div class="mb-5">
+             <a class="btn btn-primary" href="{{ path('admin_training_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle formation</a>
+
              <table class="table">
                  <thead>
                  <tr>
@@ -96,7 +99,6 @@
                  {% endfor %}
                  </tbody>
              </table>
-             <a class="btn btn-primary" href="{{ path('admin_training_new') }}"><i class="fa-solid fa-cart-plus"></i>Enregistrer une nouvelle formation</a>
          </div>
      </div>
  {% endblock %}
