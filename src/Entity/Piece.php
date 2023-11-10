@@ -37,9 +37,13 @@ class Piece
     #[ORM\OneToMany(mappedBy: 'piece', targetEntity: Images::class, cascade: ["persist", "remove"])]
     private Collection $images;
 
+    #[ORM\OneToMany(mappedBy: 'pieces', targetEntity: OrderDetail::class)]
+    private Collection $orderDetails;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->orderDetails = new ArrayCollection();
     }
     public function computeSlug(SluggerInterface $slugger)
     {
@@ -150,6 +154,36 @@ class Piece
             // set the owning side to null (unless already changed)
             if ($image->getPiece() === $this) {
                 $image->setPiece(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderDetail>
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetail $orderDetail): static
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails->add($orderDetail);
+            $orderDetail->setPieces($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetail $orderDetail): static
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getPieces() === $this) {
+                $orderDetail->setPieces(null);
             }
         }
 
