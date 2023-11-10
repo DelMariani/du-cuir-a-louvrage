@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Du Cuir à l'Ouvrage{% endblock %}</title>
+        <meta name="description" content="Artisane maroquinière et passionnée du travail du cuir, je fabrique et couds mes créations à la main. Made in France.">
         <!-- link favicone !-->
         <link rel="icon" href="{{ asset('img/faviconeDcao.ico') }}">
         {% block stylesheets %}
@@ -14,7 +15,7 @@
             <!-- link CSS !-->
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
             <!-- link animate CSS !-->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
         {% endblock %}
 
         {% block javascripts %}
@@ -59,7 +60,7 @@
                     {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin_list') }}">Tableau de bord</a>
+                        <a class="nav-link" href="{{ path('admin_list') }}"><strong>Tableau de bord</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('authout') }}">Déconnexion</a>
